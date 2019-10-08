@@ -14,12 +14,18 @@ export class CustomMap {
     });
   }
   addMarker(mappable: Mappable): void {
-    new google.maps.Marker({
+    const marker = new google.maps.Marker({
       map: this.googleMap,
       position: {
         lng: mappable.location.lng,
         lat: mappable.location.lat
       }
+    });
+    marker.addListener("click", () => {
+      const infoWindow = new google.maps.InfoWindow({
+        content: "Hello world"
+      });
+      infoWindow.open(this.googleMap, marker);
     });
   }
 }
